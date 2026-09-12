@@ -187,6 +187,13 @@ def test_non_finite_duration_raises_value_error(duration: float) -> None:
         make_result(duration_seconds=duration)
 
 
+@pytest.mark.parametrize("duration", [True, False])
+def test_boolean_duration_raises_value_error(duration: bool) -> None:
+    # `bool` subclasses `int`, so True/False satisfy math.isfinite() and `>= 0`.
+    with pytest.raises(ValueError, match="not bool"):
+        make_result(duration_seconds=duration)
+
+
 @pytest.mark.parametrize("policy_name", ["", " ", "\t", "\n", "   \t\n "])
 def test_empty_or_whitespace_policy_name_raises_value_error(policy_name: str) -> None:
     with pytest.raises(ValueError, match="policy_name"):

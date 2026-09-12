@@ -65,11 +65,12 @@ class PolicyResult(Generic[T]):
             ``"pii_redaction"``. Must contain at least one non-whitespace
             character and is stored exactly as provided.
         duration_seconds: Elapsed duration in seconds. Must be finite
-            and non-negative; zero is valid.
+            and non-negative; zero is valid. Booleans are rejected even though
+            ``bool`` subclasses ``int``.
 
     Raises:
         ValueError: If ``policy_name`` is empty or whitespace-only, or if
-            ``duration_seconds`` is negative, ``NaN``, or infinite.
+            ``duration_seconds`` is a ``bool``, negative, ``NaN``, or infinite.
     """
 
     output: T = field(repr=False)
@@ -80,6 +81,12 @@ class PolicyResult(Generic[T]):
     def __post_init__(self) -> None:
         if not self.policy_name.strip():
             raise ValueError("policy_name must not be empty or whitespace-only")
+        # `bool` subclasses `int`, so True/False would otherwise pass both the
+        # finiteness and sign checks and be stored as a boolean duration.
+        if isinstance(self.duration_seconds, bool):
+            raise ValueError(
+                f"duration_seconds must be a real number, not bool, got {self.duration_seconds!r}"
+            )
         if not math.isfinite(self.duration_seconds):
             raise ValueError(f"duration_seconds must be finite, got {self.duration_seconds!r}")
         if self.duration_seconds < 0:
