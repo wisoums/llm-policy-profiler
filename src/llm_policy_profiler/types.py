@@ -64,7 +64,7 @@ class PolicyResult(Generic[T]):
         policy_name: Name of the concrete logical policy, such as
             ``"pii_redaction"``. Must contain at least one non-whitespace
             character and is stored exactly as provided.
-        duration_seconds: Measured wall-clock duration in seconds. Must be finite
+        duration_seconds: Elapsed duration in seconds. Must be finite
             and non-negative; zero is valid.
 
     Raises:
