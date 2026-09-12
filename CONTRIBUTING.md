@@ -33,6 +33,8 @@ uv run pip-audit
 uv build
 ```
 
+`uv run mypy` checks both `src/` and `tests/` under strict settings; test modules are type-checked by the same command CI runs.
+
 ## Pull requests
 
 - Link the issue with `Closes #...`.

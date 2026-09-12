@@ -48,10 +48,12 @@ uv run pip-audit
 uv build
 ```
 
+`uv run mypy` is the single type-check command: it checks `src/` and `tests/` together under strict settings, so no separate run is needed for the test suite.
+
 ## Coding expectations
 
 - Python 3.11+ compatibility.
-- Strict type checking.
+- Strict type checking of source and tests.
 - Intentionally small public APIs.
 - Dependency injection for environment-dependent behavior.
 - No hidden global OpenTelemetry mutation when an injectable provider can be used.
