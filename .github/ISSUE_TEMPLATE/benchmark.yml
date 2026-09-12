@@ -1,0 +1,30 @@
+name: Benchmark proposal
+description: Propose a reproducible performance or quality benchmark
+title: "[Benchmark]: "
+labels: ["type:benchmark", "area:benchmark"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+    validations:
+      required: true
+  - type: textarea
+    id: methodology
+    attributes:
+      label: Methodology
+      description: Dataset/workload, baseline, variables, and controls.
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics
+      description: e.g. p50/p95/p99, cache precision, false-hit rate, savings.
+    validations:
+      required: true
+  - type: textarea
+    id: reproducibility
+    attributes:
+      label: Reproducibility details
+      description: Hardware/software/model/provider assumptions.
