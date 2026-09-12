@@ -86,7 +86,7 @@ indent-style = "space"
 python_version = "3.11"
 strict = true
 mypy_path = "src"
-packages = ["llm_policy_profiler"]
+files = ["src", "tests"]
 warn_unreachable = true
 
 [tool.bandit]
